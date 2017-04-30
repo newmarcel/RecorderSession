@@ -1,0 +1,26 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/mdierkes/Projekte/RecorderSession/RecorderSession/RecorderSession/RCNRecorderSession.h",
+      "line": 66,
+      "symbol": "RCNRecorderSession.-init",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mdierkes/Projekte/RecorderSession/RecorderSession/RecorderSession.h",
+      "line": 12,
+      "symbol": "RecorderSessionVersionNumber",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/mdierkes/Projekte/RecorderSession/RecorderSession/RecorderSession.h",
+      "line": 15,
+      "symbol": "RecorderSessionVersionString",
+      "symbol_kind": "sourcekitten.source.lang.objc.decl.constant",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/mdierkes/Projekte/RecorderSession"
+}

@@ -1,4 +1,8 @@
+<img src="https://raw.githubusercontent.com/newmarcel/RecorderSession/master/Icon%402x.png" width="64" height="64" />
+
 # RecorderSession
+
+[Docs](https://newmarcel.github.io/RecorderSession/index.html) | [Downloads](https://github.com/newmarcel/RecorderSession/releases)
 
 An `NSURLSession` test framework for iOS and macOS inspired by [DVR](https://github.com/venmo/DVR) and [VCR](https://github.com/vcr/vcr) _(that's where the cassette metaphor comes from…)_.
 

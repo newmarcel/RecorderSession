@@ -46,6 +46,7 @@ docs:
 	--skip-undocumented \
 	--output "$(DOCS_DIR)" \
 	--author "Marcel Dierkes" \
+	--github_url "https://github.com/newmarcel/RecorderSession" \
 	--theme fullwidth \
 	--author_url "https://github.com/newmarcel"
 	open "$(DOCS_DIR)/index.html"

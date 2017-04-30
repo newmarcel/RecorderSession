@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>RecorderSession  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+    <script src="js/lunr.min.js" defer></script>
+    <script src="js/typeahead.jquery.js" defer></script>
+    <script src="js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+
+    <a title="RecorderSession  Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="index.html">
+          RecorderSession Docs
+        </a>
+        
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/newmarcel/RecorderSession">
+            <img class="header-icon" src="img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="index.html">RecorderSession Reference</a>
+      <img class="carat" src="img/carat.png" />
+      RecorderSession  Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Classes/RCNRecorderSession.html">RCNRecorderSession</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/RCNValidationOptions.html">RCNValidationOptions</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            
+            <p><img src="https://raw.githubusercontent.com/newmarcel/RecorderSession/master/Icon%402x.png" width="64" height="64" /></p>
+<h1 id='recordersession' class='heading'>RecorderSession</h1>
+
+<p><a href="https://newmarcel.github.io/RecorderSession/index.html">Docs</a> | <a href="https://github.com/newmarcel/RecorderSession/releases">Downloads</a></p>
+
+<p>An <code>NSURLSession</code> test framework for iOS and macOS inspired by <a href="https://github.com/venmo/DVR">DVR</a> and <a href="https://github.com/vcr/vcr">VCR</a> <em>(that&rsquo;s where the cassette metaphor comes from…)</em>.</p>
+
+<p>It&rsquo;s not as mature as <a href="https://github.com/venmo/DVR">DVR</a> yet, but there are some advantages:</p>
+
+<ul>
+<li>cassettes are stored in a <code>Cassettes.bundle</code> folder and don&rsquo;t pollute your Xcode project file</li>
+<li>customizable options for matching the original request with the cassette, e.g. the host component can be ignored</li>
+<li>it&rsquo;s tiny: 700 KB (vs. DVR: 3.4 MB)</li>
+<li>no Swift dependency, but it works great with Swift
+
+<ul>
+<li>in fact Objective-C support was the primary motivation for creating this framework</li>
+</ul></li>
+</ul>
+<h2 id='usage' class='heading'>Usage</h2>
+
+<p>To allow <code>NSURLSession</code> testing, please make sure your API client&rsquo;s session can be either switched out or added in via dependency injection in the initializer.</p>
+
+<p>Your test target should contain a <code>Cassettes.bundle</code> folder where all the recorded cassettes are stored.</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">RecorderSession</span>
+
+<span class="k">let</span> <span class="nv">bundle</span> <span class="o">=</span> <span class="kt">Bundle</span><span class="p">(</span><span class="nv">for</span><span class="p">:</span> <span class="nf">type</span><span class="p">(</span><span class="nv">of</span><span class="p">:</span> <span class="k">self</span><span class="p">))</span><span class="o">.</span><span class="n">cassetteBundle</span>
+
+<span class="c1">// Switch your URLSession with RecorderSession.</span>
+<span class="c1">// The original URLSession will be used for recording cassettes.</span>
+<span class="k">let</span> <span class="nv">recorderSession</span> <span class="o">=</span> <span class="kt">RCNRecorderSession</span><span class="p">(</span><span class="nv">backingSession</span><span class="p">:</span> <span class="n">originalURLSession</span><span class="p">,</span> <span class="nv">cassetteBundle</span><span class="p">:</span> <span class="n">bundle</span><span class="p">)</span>
+<span class="k">let</span> <span class="nv">client</span> <span class="o">=</span> <span class="kt">MyAPIClient</span><span class="p">(</span><span class="nv">session</span><span class="p">:</span> <span class="n">recorderSession</span><span class="p">)</span>
+
+<span class="c1">// Load a cassette to record or replay</span>
+<span class="n">recorderSession</span><span class="o">.</span><span class="nf">insertCassette</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"GetItems"</span><span class="p">)</span>
+
+<span class="c1">// Perform your network request</span>
+<span class="n">client</span><span class="o">.</span><span class="n">getItems</span> <span class="p">{</span> <span class="n">items</span><span class="p">,</span> <span class="n">error</span> <span class="k">in</span>
+    <span class="kt">XCTAssertNotNil</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+    <span class="kt">XCTAssertNil</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+
+    <span class="n">expectation</span><span class="o">.</span><span class="nf">fulfill</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>When you run the test for the first time, the cassette will be persisted to disk and the executation will halt. You need to move the cassette file from the printed location to your cassette bundle. All subsequent test runs will use the cassette instead.</p>
+<h2 id='installation-via-carthage' class='heading'>Installation via Carthage</h2>
+
+<p>Carthage is the preferred, but not the only way of installing <code>RecorderSession</code> into your project. Add the following line to your Cartfile and run <code>carthage update</code>:</p>
+<pre class="highlight plaintext"><code>github "newmarcel/RecorderSession"
+</code></pre>
+<h2 id='naming' class='heading'>Naming</h2>
+
+<ul>
+<li><strong><q>Cassette</q></strong>: A JSON file representing an HTTP request, response and body.</li>
+<li><strong><q>recording a cassette</q></strong>: Making a live HTTP request and save the request, response and payload to disk.</li>
+<li><strong><q>playing a cassette</q></strong>: Simulating a live HTTP request, response and body with the saved JSON <em><q>cassette</q></em> from disk.</li>
+</ul>
+<h2 id='license' class='heading'>License</h2>
+
+<p><a href="./LICENSE">MIT</a></p>
+
+          </div>
+        </section>
+
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2017 <a class="link" href="https://github.com/newmarcel" target="_blank" rel="external">Marcel Dierkes</a>. All rights reserved. (Last updated: 2017-04-30)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
