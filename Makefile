@@ -10,7 +10,6 @@ clean:
 	rm -rf $(BUILD_DIR)
 	rm -rf Carthage
 	rm -rf $(NAME).framework.zip
-	rm -rf $(DOCS_DIR)
 
 init:
 	gem install bundler
