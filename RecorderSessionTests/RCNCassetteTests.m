@@ -10,8 +10,8 @@
 @import RecorderSession;
 #import "RCNCassette+Private.h"
 
-#define kURL [NSURL URLWithString:@"https://www.example.com/"]
-#define kName @"GetExampleCom"
+#define kKeyURL [NSURL URLWithString:@"https://www.example.com/"]
+#define kKeyName @"GetExampleCom"
 
 @interface RCNCassetteTests : XCTestCase
 @end
@@ -20,12 +20,12 @@
 
 - (NSURLRequest *)request
 {
-    return [[NSURLRequest alloc] initWithURL:kURL];
+    return [[NSURLRequest alloc] initWithURL:kKeyURL];
 }
 
 - (NSHTTPURLResponse *)response
 {
-    return [[NSHTTPURLResponse alloc] initWithURL:kURL
+    return [[NSHTTPURLResponse alloc] initWithURL:kKeyURL
                                        statusCode:200
                                       HTTPVersion:@"HTTP/1.1"
                                      headerFields:@{}];
@@ -38,8 +38,9 @@
 
 - (RCNCassette *)cassette
 {
-    return [[RCNCassette alloc] initWithName:kName
+    return [[RCNCassette alloc] initWithName:kKeyName
                                      request:[self request]
+                    additionalRequestHeaders:nil
                                     response:[self response]
                                         data:[self data]
                                        error:nil];
@@ -50,7 +51,7 @@
 - (void)testInit
 {
     RCNCassette *cassette = [self cassette];
-    XCTAssertEqualObjects(cassette.name, kName);
+    XCTAssertEqualObjects(cassette.name, kKeyName);
     XCTAssertEqualObjects(cassette.request, [self request]);
     XCTAssertEqualObjects(cassette.response.URL, [self response].URL);
     XCTAssertEqual(cassette.response.statusCode, [self response].statusCode);
@@ -61,7 +62,7 @@
 {
     RCNCassette *cassette = [self cassette];
 
-    NSString *expectedPathComponent = [NSString stringWithFormat:@"%@.json", kName];
+    NSString *expectedPathComponent = [NSString stringWithFormat:@"%@.json", kKeyName];
     XCTAssertEqualObjects(cassette.fileURL.lastPathComponent, expectedPathComponent);
 }
 

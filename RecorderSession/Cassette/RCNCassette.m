@@ -16,7 +16,7 @@ static BOOL RCNIsEqual(id _Nullable lhs, id _Nullable rhs);
 
 @implementation RCNCassette
 
-- (instancetype)initWithName:(NSString *)name request:(NSURLRequest *)request response:(NSHTTPURLResponse *)response data:(NSData *)data error:(NSError *)error
+- (instancetype)initWithName:(NSString *)name request:(NSURLRequest *)request additionalRequestHeaders:(nullable SNAHeaderDictionary)additionalRequestHeaders response:(nullable NSHTTPURLResponse *)response data:(nullable NSData *)data error:(nullable NSError *)error
 {
     NSParameterAssert(name);
     NSParameterAssert(request);
@@ -26,6 +26,7 @@ static BOOL RCNIsEqual(id _Nullable lhs, id _Nullable rhs);
     {
         self.name = name;
         self.request = request;
+        self.additionalRequestHeaders = additionalRequestHeaders;
         self.response = response;
         self.responseData = data;
         self.responseError = error;

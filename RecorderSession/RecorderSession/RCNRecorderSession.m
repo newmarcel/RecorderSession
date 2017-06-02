@@ -99,6 +99,8 @@
         [self ejectCassette];
         return [[RCNRecorderSessionDataTask alloc] initWithCassette:cassette completionHandler:completionHandler];
     }
+    
+    SNAHeaderDictionary additionalHeaders = self.backingSession.configuration.HTTPAdditionalHeaders;
 
     // Perform the live request and record the response
     id handler = ^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -112,6 +114,7 @@
 
         RCNCassette *cassette = [[RCNCassette alloc] initWithName:currentCassette
                                                           request:request
+                                         additionalRequestHeaders:additionalHeaders
                                                          response:(NSHTTPURLResponse *)response
                                                              data:data
                                                             error:error];

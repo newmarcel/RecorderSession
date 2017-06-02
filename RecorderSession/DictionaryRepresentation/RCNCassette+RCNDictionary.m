@@ -12,29 +12,44 @@
 #import "NSURLRequest+RCNDictionary.h"
 #import "NSHTTPURLResponse+RCNDictionary.h"
 
+#define kKeyName @"name"
+#define kKeyRequest @"request"
+#define kKeyRequestHeaders @"additionalRequestHeaders"
+#define kKeyResponse @"response"
+#define kKeyBody @"body"
+#define kKeyError @"error"
+#define kKeyType @"type"
+#define kKeyPayload @"payload"
+
 @implementation RCNCassette (RCNDictionary)
 
 - (NSDictionary *)rcn_dictionaryRepresentation
 {
     NSMutableDictionary *dict = [NSMutableDictionary new];
 
-    dict[@"name"] = self.name;
+    dict[kKeyName] = self.name;
 
     if(self.request)
     {
-        dict[@"request"] = self.request.rcn_dictionaryRepresentation;
+        dict[kKeyRequest] = self.request.rcn_dictionaryRepresentation;
     }
 
     if(self.response)
     {
-        dict[@"response"] = self.response.rcn_dictionaryRepresentation;
+        dict[kKeyResponse] = self.response.rcn_dictionaryRepresentation;
+    }
+    
+    
+    if(self.additionalRequestHeaders)
+    {
+        dict[kKeyRequestHeaders] = self.additionalRequestHeaders;
     }
 
-    dict[@"body"] = [self bodyDictionary];
+    dict[kKeyBody] = [self bodyDictionary];
 
     if(self.responseError)
     {
-        dict[@"error"] = @(self.responseError.code);
+        dict[kKeyError] = @(self.responseError.code);
     }
 
     return [NSDictionary dictionaryWithDictionary:dict];
@@ -47,14 +62,14 @@
     self = [super init];
     if(self)
     {
-        NSString *name = dictionary[@"name"];
+        NSString *name = dictionary[kKeyName];
         if(name == nil)
         {
             return nil;
         }
         self.name = name;
 
-        NSDictionary *requestDict = dictionary[@"request"];
+        NSDictionary *requestDict = dictionary[kKeyRequest];
         if(requestDict == nil)
         {
             return nil;
@@ -67,18 +82,23 @@
         }
         self.request = [request copy];
 
-        NSDictionary *responseDict = dictionary[@"response"];
+        NSDictionary *responseDict = dictionary[kKeyResponse];
         if(responseDict != nil)
         {
             self.response = [[RCNHTTPURLResponse alloc] rcn_initWithDictionaryRepresentation:responseDict];
         }
-
-        if(dictionary[@"body"] != nil)
+        
+        if(dictionary[kKeyRequestHeaders])
         {
-            [self setResponseDataWithBodyDictionary:dictionary[@"body"]];
+            self.additionalRequestHeaders = dictionary[kKeyRequestHeaders];
         }
 
-        NSAssert(dictionary[@"error"] == nil, @"Error is not supported yet.");
+        if(dictionary[kKeyBody] != nil)
+        {
+            [self setResponseDataWithBodyDictionary:dictionary[kKeyBody]];
+        }
+
+        NSAssert(dictionary[kKeyError] == nil, @"Error is not supported yet.");
     }
     return self;
 }
@@ -92,8 +112,8 @@
         if(responseObject != nil)
         {
             return @{
-                @"type": RCNCassetteResponseTypeToString(RCNCassetteResponseTypeJSON),
-                @"payload": responseObject
+                kKeyType: RCNCassetteResponseTypeToString(RCNCassetteResponseTypeJSON),
+                kKeyPayload: responseObject
             };
         }
         else
@@ -102,19 +122,19 @@
             if(base64)
             {
                 return @{
-                    @"type": RCNCassetteResponseTypeToString(RCNCassetteResponseTypeData),
-                    @"payload": base64
+                    kKeyType: RCNCassetteResponseTypeToString(RCNCassetteResponseTypeData),
+                    kKeyPayload: base64
                 };
             }
         }
     }
 
-    return @{ @"type": RCNCassetteResponseTypeToString(RCNCassetteResponseTypeNone) };
+    return @{ kKeyType: RCNCassetteResponseTypeToString(RCNCassetteResponseTypeNone) };
 }
 
 - (void)setResponseDataWithBodyDictionary:(NSDictionary *)dictionary
 {
-    RCNCassetteResponseType type = RCNCassetteResponseTypeFromString(dictionary[@"type"]);
+    RCNCassetteResponseType type = RCNCassetteResponseTypeFromString(dictionary[kKeyType]);
     {
         switch(type)
         {
@@ -123,7 +143,7 @@
                 break;
             case RCNCassetteResponseTypeJSON:
             {
-                NSDictionary *payload = dictionary[@"payload"];
+                NSDictionary *payload = dictionary[kKeyPayload];
                 if([NSJSONSerialization isValidJSONObject:payload])
                 {
                     NSError *error;
@@ -137,7 +157,7 @@
             }
             case RCNCassetteResponseTypeData:
             {
-                NSString *payload = dictionary[@"payload"];
+                NSString *payload = dictionary[kKeyPayload];
                 if(payload != nil)
                 {
                     NSData *data = [[NSData alloc] initWithBase64EncodedString:payload options:kNilOptions];

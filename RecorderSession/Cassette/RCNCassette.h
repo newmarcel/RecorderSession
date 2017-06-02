@@ -28,6 +28,8 @@ typedef NS_ENUM(NSInteger, RCNCassetteError) {
     RCNCassetteErrorRequestValidationFailed = 1
 };
 
+typedef NSDictionary<NSString *, NSString *> *SNAHeaderDictionary;
+
 /**
  An internal representation of a cassette.
  
@@ -46,6 +48,11 @@ typedef NS_ENUM(NSInteger, RCNCassetteError) {
  The recorded HTTP request.
  */
 @property (copy, nonatomic, readonly) NSURLRequest *request;
+
+/**
+ Additional HTTP request headers from `NSURLSessionConfiguration`.
+ */
+@property (copy, nonatomic, readonly, nullable) SNAHeaderDictionary additionalRequestHeaders;
 
 /**
  The recorded HTTP response.
@@ -72,12 +79,14 @@ typedef NS_ENUM(NSInteger, RCNCassetteError) {
 
  @param name The cassette name
  @param request An URL request
+ @param additionalRequestHeaders A dictionary of additional headers sent with the request
  @param response A (HTTP) URL response
  @param data Optional response data
  @param error Optional error
  */
 - (instancetype)initWithName:(NSString *)name
                      request:(NSURLRequest *)request
+    additionalRequestHeaders:(nullable SNAHeaderDictionary)additionalRequestHeaders
                     response:(nullable NSHTTPURLResponse *)response
                         data:(nullable NSData *)data
                        error:(nullable NSError *)error;

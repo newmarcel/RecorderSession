@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RCNCassette ()
 @property (copy, nonatomic, readwrite) NSString *name;
 @property (copy, nonatomic, readwrite) NSURLRequest *request;
+@property (copy, nonatomic, readwrite, nullable) SNAHeaderDictionary additionalRequestHeaders;
 @property (copy, nonatomic, readwrite, nullable) NSHTTPURLResponse *response;
 @property (copy, nonatomic, readwrite, nullable) NSData *responseData;
 @property (copy, nonatomic, readwrite, nullable) NSError *responseError;
