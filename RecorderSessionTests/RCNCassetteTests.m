@@ -10,8 +10,8 @@
 @import RecorderSession;
 #import "RCNCassette+Private.h"
 
-#define kKeyURL [NSURL URLWithString:@"https://www.example.com/"]
-#define kKeyName @"GetExampleCom"
+#define kURL [NSURL URLWithString:@"https://www.example.com/"]
+#define kName @"GetExampleCom"
 
 @interface RCNCassetteTests : XCTestCase
 @end
@@ -20,12 +20,12 @@
 
 - (NSURLRequest *)request
 {
-    return [[NSURLRequest alloc] initWithURL:kKeyURL];
+    return [[NSURLRequest alloc] initWithURL:kURL];
 }
 
 - (NSHTTPURLResponse *)response
 {
-    return [[NSHTTPURLResponse alloc] initWithURL:kKeyURL
+    return [[NSHTTPURLResponse alloc] initWithURL:kURL
                                        statusCode:200
                                       HTTPVersion:@"HTTP/1.1"
                                      headerFields:@{}];
@@ -36,11 +36,16 @@
     return [@"{\"hello\": \"world\"}" dataUsingEncoding:NSUTF8StringEncoding];
 }
 
+- (SNAHeaderDictionary)headers
+{
+    return @{ @"header1": @"value1", @"header2": @"value2" };
+}
+
 - (RCNCassette *)cassette
 {
-    return [[RCNCassette alloc] initWithName:kKeyName
+    return [[RCNCassette alloc] initWithName:kName
                                      request:[self request]
-                    additionalRequestHeaders:nil
+                    additionalRequestHeaders:[self headers]
                                     response:[self response]
                                         data:[self data]
                                        error:nil];
@@ -51,8 +56,9 @@
 - (void)testInit
 {
     RCNCassette *cassette = [self cassette];
-    XCTAssertEqualObjects(cassette.name, kKeyName);
+    XCTAssertEqualObjects(cassette.name, kName);
     XCTAssertEqualObjects(cassette.request, [self request]);
+    XCTAssertEqualObjects(cassette.additionalRequestHeaders, [self headers]);
     XCTAssertEqualObjects(cassette.response.URL, [self response].URL);
     XCTAssertEqual(cassette.response.statusCode, [self response].statusCode);
     XCTAssertEqualObjects(cassette.responseData, [self data]);
@@ -62,7 +68,7 @@
 {
     RCNCassette *cassette = [self cassette];
 
-    NSString *expectedPathComponent = [NSString stringWithFormat:@"%@.json", kKeyName];
+    NSString *expectedPathComponent = [NSString stringWithFormat:@"%@.json", kName];
     XCTAssertEqualObjects(cassette.fileURL.lastPathComponent, expectedPathComponent);
 }
 
@@ -183,6 +189,15 @@
         @"Content-Type": @"text/invalid" };
 
     [self runTestOptions:RCNValidationOptionHTTPHeaderFields invalidRequest:invalidRequest];
+}
+
+- (void)testRequestValidationAdditionalRequestHeaders
+{
+    NSMutableURLRequest *invalidRequest = (NSMutableURLRequest *)[[self request] mutableCopy];
+    invalidRequest.allHTTPHeaderFields = @{ @"invalid": @"header",
+                                            @"Content-Type": @"text/invalid" };
+    
+    [self runTestOptions:RCNValidationOptionAdditionalRequestHeaders invalidRequest:invalidRequest];
 }
 
 - (void)runTestOptions:(RCNValidationOptions)options invalidRequest:(NSURLRequest *)invalidRequest

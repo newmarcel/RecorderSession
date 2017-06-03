@@ -54,6 +54,11 @@ typedef NS_OPTIONS(NSUInteger, RCNValidationOptions) {
     RCNValidationOptionHTTPHeaderFields = 1 << 6,
 
     /**
+     Validates additional HTTP request headers
+     */
+    RCNValidationOptionAdditionalRequestHeaders = 1 << 7,
+    
+    /**
      Validates all available components of an `NSURLRequest`.
      */
     RCNValidationOptionAll = RCNValidationOptionScheme
@@ -63,4 +68,5 @@ typedef NS_OPTIONS(NSUInteger, RCNValidationOptions) {
         | RCNValidationOptionHTTPMethod
         | RCNValidationOptionHTTPBody
         | RCNValidationOptionHTTPHeaderFields
+        | RCNValidationOptionAdditionalRequestHeaders
 };
