@@ -89,10 +89,9 @@
     {
         NSError *error;
         [cassette validateRequest:request
-         additionHeaders:self.configuration.HTTPAdditionalHeaders
+                  additionHeaders:self.configuration.HTTPAdditionalHeaders
                 validationOptions:self.validationOptions
-                            error:&error
-         ];
+                            error:&error];
         if(error != nil && error.domain == RCNCassetteErrorDomain && error.code == RCNCassetteErrorRequestValidationFailed)
         {
             NSString *reason = error.userInfo[NSLocalizedFailureReasonErrorKey];
@@ -103,7 +102,7 @@
         [self ejectCassette];
         return [[RCNRecorderSessionDataTask alloc] initWithCassette:cassette completionHandler:completionHandler];
     }
-    
+
     RCNHeaderDictionary *additionalHeaders = self.backingSession.configuration.HTTPAdditionalHeaders;
 
     // Perform the live request and record the response

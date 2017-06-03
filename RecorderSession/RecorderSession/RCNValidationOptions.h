@@ -57,7 +57,7 @@ typedef NS_OPTIONS(NSUInteger, RCNValidationOptions) {
      Validates additional HTTP request headers
      */
     RCNValidationOptionAdditionalRequestHeaders = 1 << 7,
-    
+
     /**
      Default validation options for `NSURLRequest` components.
      */

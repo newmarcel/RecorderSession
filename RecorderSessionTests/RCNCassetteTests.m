@@ -39,10 +39,10 @@
 - (RCNHeaderDictionary *)headers
 {
     return @{
-             @"Accept-Language": @"en",
-             @"User-Agent": @"ExampleApp/1",
-             @"Accept-Encoding": @"gzip;q=1.0,compress;q=0.5"
-             };
+        @"Accept-Language": @"en",
+        @"User-Agent": @"ExampleApp/1",
+        @"Accept-Encoding": @"gzip;q=1.0,compress;q=0.5"
+    };
 }
 
 - (RCNCassette *)cassette
@@ -198,8 +198,8 @@
 - (void)testRequestValidationAdditionalRequestHeaders
 {
     NSDictionary *invalidHeaders = @{ @"invalid": @"header",
-                                      @"Content-Type": @"text/invalid" };
-    
+        @"Content-Type": @"text/invalid" };
+
     [self runTestOptions:RCNValidationOptionAdditionalRequestHeaders invalidAdditionalHeaders:invalidHeaders invalidRequest:[self request]];
 }
 

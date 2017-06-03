@@ -195,7 +195,7 @@ static BOOL RCNIsEqual(id _Nullable lhs, id _Nullable rhs);
             return NO;
         }
     }
-    
+
     // Additional request headers
     if(options & RCNValidationOptionAdditionalRequestHeaders)
     {
@@ -243,12 +243,12 @@ static BOOL RCNIsEqual(id _Nullable lhs, id _Nullable rhs)
     {
         return [lhs isEqualToNumber:rhs];
     }
-    
+
     if([lhs isKindOfClass:[NSDictionary class]])
     {
         return [lhs isEqualToDictionary:rhs];
     }
-    
+
     if([lhs isKindOfClass:[NSArray class]])
     {
         return [lhs isEqualToArray:rhs];

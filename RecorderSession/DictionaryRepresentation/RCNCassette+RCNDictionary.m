@@ -38,8 +38,7 @@
     {
         dict[kKeyResponse] = self.response.rcn_dictionaryRepresentation;
     }
-    
-    
+
     if(self.additionalRequestHeaders)
     {
         dict[kKeyRequestHeaders] = self.additionalRequestHeaders;
@@ -87,7 +86,7 @@
         {
             self.response = [[RCNHTTPURLResponse alloc] rcn_initWithDictionaryRepresentation:responseDict];
         }
-        
+
         if(dictionary[kKeyRequestHeaders])
         {
             self.additionalRequestHeaders = dictionary[kKeyRequestHeaders];
