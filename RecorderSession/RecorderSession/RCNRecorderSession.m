@@ -37,6 +37,11 @@
     return self;
 }
 
+- (id)forwardingTargetForSelector:(SEL)aSelector
+{
+    return self.backingSession;
+}
+
 #pragma mark - Insert and Eject
 
 - (NSArray<NSString *> *)insertedCassettes
@@ -138,16 +143,6 @@
         RCNExit();
     };
     return [self.backingSession dataTaskWithRequest:request completionHandler:handler];
-}
-
-- (void)invalidateAndCancel
-{
-    [self.backingSession invalidateAndCancel];
-}
-
-- (NSURLSessionConfiguration *)configuration
-{
-    return self.backingSession.configuration;
 }
 
 @end

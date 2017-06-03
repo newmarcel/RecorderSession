@@ -53,4 +53,22 @@
     XCTAssertNil(cassette);
 }
 
+- (void)testCassetteEmpty
+{
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    NSBundle *cassetteBundle = bundle.cassetteBundle;
+    
+    RCNCassette *cassette = [cassetteBundle cassetteWithName:@"Empty"];
+    XCTAssertNil(cassette);
+}
+
+- (void)testCassetteInvalid
+{
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    NSBundle *cassetteBundle = bundle.cassetteBundle;
+    
+    RCNCassette *cassette = [cassetteBundle cassetteWithName:@"Invalid"];
+    XCTAssertNil(cassette);
+}
+
 @end
