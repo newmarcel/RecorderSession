@@ -112,7 +112,7 @@ typedef NSDictionary<NSString *, NSString *> RCNHeaderDictionary;
  @return YES if the supplied request matches the cassette's recorded request
  */
 - (BOOL)validateRequest:(NSURLRequest *)request
-        additionHeaders:(nullable RCNHeaderDictionary *)headers
+      additionalHeaders:(nullable RCNHeaderDictionary *)headers
       validationOptions:(RCNValidationOptions)options
                   error:(NSError *_Nullable *)error;
 

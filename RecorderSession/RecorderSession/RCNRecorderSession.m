@@ -89,7 +89,7 @@
     {
         NSError *error;
         [cassette validateRequest:request
-                  additionHeaders:self.configuration.HTTPAdditionalHeaders
+                additionalHeaders:self.configuration.HTTPAdditionalHeaders
                 validationOptions:self.validationOptions
                             error:&error];
         if(error != nil && error.domain == RCNCassetteErrorDomain && error.code == RCNCassetteErrorRequestValidationFailed)

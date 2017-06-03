@@ -83,7 +83,7 @@ static BOOL RCNIsEqual(id _Nullable lhs, id _Nullable rhs);
 
 #pragma mark - Validation
 
-- (BOOL)validateRequest:(NSURLRequest *)request additionHeaders:(nullable RCNHeaderDictionary *)headers validationOptions:(RCNValidationOptions)options error:(NSError *_Nullable *)error
+- (BOOL)validateRequest:(NSURLRequest *)request additionalHeaders:(nullable RCNHeaderDictionary *)headers validationOptions:(RCNValidationOptions)options error:(NSError *_Nullable *)error
 {
     NSParameterAssert(request);
 

@@ -94,7 +94,7 @@
     RCNCassette *cassette = [self cassette];
 
     NSError *error;
-    BOOL result = [cassette validateRequest:[self request] additionHeaders:nil validationOptions:RCNValidationOptionNone error:&error];
+    BOOL result = [cassette validateRequest:[self request] additionalHeaders:nil validationOptions:RCNValidationOptionNone error:&error];
     XCTAssertTrue(result);
     XCTAssertNil(error);
 }
@@ -215,11 +215,11 @@
     RCNHeaderDictionary *validHeaders = [self headers];
 
     NSError *error;
-    BOOL result = [cassette validateRequest:validRequest additionHeaders:validHeaders validationOptions:options error:&error];
+    BOOL result = [cassette validateRequest:validRequest additionalHeaders:validHeaders validationOptions:options error:&error];
     XCTAssertTrue(result);
     XCTAssertNil(error);
 
-    result = [cassette validateRequest:invalidRequest additionHeaders:headers validationOptions:options error:&error];
+    result = [cassette validateRequest:invalidRequest additionalHeaders:headers validationOptions:options error:&error];
     XCTAssertFalse(result);
     XCTAssertNotNil(error);
 }
@@ -228,8 +228,8 @@
 {
     RCNCassette *cassette = [self cassette];
     NSURLRequest *validRequest = [self request];
-    XCTAssertTrue([cassette validateRequest:validRequest additionHeaders:nil validationOptions:options error:NULL]);
-    XCTAssertFalse([cassette validateRequest:invalidRequest additionHeaders:nil validationOptions:options error:NULL]);
+    XCTAssertTrue([cassette validateRequest:validRequest additionalHeaders:nil validationOptions:options error:NULL]);
+    XCTAssertFalse([cassette validateRequest:invalidRequest additionalHeaders:nil validationOptions:options error:NULL]);
 }
 
 @end
