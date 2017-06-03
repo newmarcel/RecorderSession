@@ -103,7 +103,7 @@
         return [[RCNRecorderSessionDataTask alloc] initWithCassette:cassette completionHandler:completionHandler];
     }
 
-    RCNHeaderDictionary *additionalHeaders = self.backingSession.configuration.HTTPAdditionalHeaders;
+    RCNHeaderDictionary *additionalHeaders = self.configuration.HTTPAdditionalHeaders;
 
     // Perform the live request and record the response
     id handler = ^(NSData *data, NSURLResponse *response, NSError *error) {
