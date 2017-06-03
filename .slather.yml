@@ -1,0 +1,8 @@
+coverage_service: cobertura_xml
+xcodeproj: RecorderSession.xcodeproj
+scheme: RecorderSession (macOS)
+output_directory: build/Reports
+build_directory: build
+ignore:
+  - docs
+  - RecorderSessionTests/*
