@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
  RCNValidationOptionAll ^ RCNValidationOptionQuery
  ```
  
- Defaults to `.all`
+ Defaults to `.default`
  */
 @property (nonatomic) RCNValidationOptions validationOptions;
 

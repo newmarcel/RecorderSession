@@ -83,7 +83,7 @@ static BOOL RCNIsEqual(id _Nullable lhs, id _Nullable rhs);
 
 #pragma mark - Validation
 
-- (BOOL)validateRequest:(NSURLRequest *)request validationOptions:(RCNValidationOptions)options error:(NSError *_Nullable *)error
+- (BOOL)validateRequest:(NSURLRequest *)request additionHeaders:(nullable SNAHeaderDictionary)headers validationOptions:(RCNValidationOptions)options error:(NSError *_Nullable *)error
 {
     NSParameterAssert(request);
 
@@ -195,6 +195,17 @@ static BOOL RCNIsEqual(id _Nullable lhs, id _Nullable rhs);
             return NO;
         }
     }
+    
+    // Additional request headers
+    if(options & RCNValidationOptionAdditionalRequestHeaders)
+    {
+        if(!RCNIsEqual(self.additionalRequestHeaders, headers))
+        {
+            NSString *reason = NSLocalizedString(@"The additional HTTP request headers don't match the recorded headers.", nil);
+            [self updateValidationError:error withReason:reason];
+            return NO;
+        }
+    }
 
     return YES;
 }
@@ -231,6 +242,16 @@ static BOOL RCNIsEqual(id _Nullable lhs, id _Nullable rhs)
     if([lhs isKindOfClass:[NSNumber class]])
     {
         return [lhs isEqualToNumber:rhs];
+    }
+    
+    if([lhs isKindOfClass:[NSDictionary class]])
+    {
+        return [lhs isEqualToDictionary:rhs];
+    }
+    
+    if([lhs isKindOfClass:[NSArray class]])
+    {
+        return [lhs isEqualToArray:rhs];
     }
 
     return [lhs isEqual:rhs];

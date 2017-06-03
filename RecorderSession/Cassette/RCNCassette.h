@@ -103,11 +103,15 @@ typedef NSDictionary<NSString *, NSString *> *SNAHeaderDictionary;
  it to the supplied `request`.
 
  @param request The `NSURLRequest` for validation
+ @param headers Additional HTTP request headers
  @param options Options to control the validation behavior
  @param error An optional error
  @return YES if the supplied request matches the cassette's recorded request
  */
-- (BOOL)validateRequest:(NSURLRequest *)request validationOptions:(RCNValidationOptions)options error:(NSError *_Nullable *)error;
+- (BOOL)validateRequest:(NSURLRequest *)request
+        additionHeaders:(nullable SNAHeaderDictionary)headers
+      validationOptions:(RCNValidationOptions)options
+                  error:(NSError *_Nullable *)error;
 
 @end
 

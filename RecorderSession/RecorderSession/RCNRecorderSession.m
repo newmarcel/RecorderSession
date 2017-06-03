@@ -31,7 +31,7 @@
     {
         self.backingSession = backingSession;
         self.cassetteBundle = bundle;
-        self.validationOptions = RCNValidationOptionAll;
+        self.validationOptions = RCNValidationOptionDefault;
         self.insertedMutableCassettes = [NSMutableArray new];
     }
     return self;
@@ -88,7 +88,11 @@
     if(cassette)
     {
         NSError *error;
-        [cassette validateRequest:request validationOptions:self.validationOptions error:&error];
+        [cassette validateRequest:request
+         additionHeaders:self.configuration.HTTPAdditionalHeaders
+                validationOptions:self.validationOptions
+                            error:&error
+         ];
         if(error != nil && error.domain == RCNCassetteErrorDomain && error.code == RCNCassetteErrorRequestValidationFailed)
         {
             NSString *reason = error.userInfo[NSLocalizedFailureReasonErrorKey];
@@ -140,6 +144,11 @@
 - (void)invalidateAndCancel
 {
     [self.backingSession invalidateAndCancel];
+}
+
+- (NSURLSessionConfiguration *)configuration
+{
+    return self.backingSession.configuration;
 }
 
 @end
