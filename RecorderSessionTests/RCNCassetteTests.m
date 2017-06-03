@@ -36,7 +36,7 @@
     return [@"{\"hello\": \"world\"}" dataUsingEncoding:NSUTF8StringEncoding];
 }
 
-- (SNAHeaderDictionary)headers
+- (RCNHeaderDictionary *)headers
 {
     return @{
              @"Accept-Language": @"en",
@@ -208,11 +208,11 @@
     [self runTestOptions:options invalidAdditionalHeaders:nil invalidRequest:invalidRequest];
 }
 
-- (void)runTestOptions:(RCNValidationOptions)options invalidAdditionalHeaders:(nullable SNAHeaderDictionary)headers invalidRequest:(NSURLRequest *)invalidRequest
+- (void)runTestOptions:(RCNValidationOptions)options invalidAdditionalHeaders:(nullable RCNHeaderDictionary *)headers invalidRequest:(NSURLRequest *)invalidRequest
 {
     RCNCassette *cassette = [self cassette];
     NSURLRequest *validRequest = [self request];
-    SNAHeaderDictionary validHeaders = [self headers];
+    RCNHeaderDictionary *validHeaders = [self headers];
 
     NSError *error;
     BOOL result = [cassette validateRequest:validRequest additionHeaders:validHeaders validationOptions:options error:&error];

@@ -28,7 +28,10 @@ typedef NS_ENUM(NSInteger, RCNCassetteError) {
     RCNCassetteErrorRequestValidationFailed = 1
 };
 
-typedef NSDictionary<NSString *, NSString *> *SNAHeaderDictionary;
+/**
+ A convenience type for a HTTP header dictionary containing string values.
+ */
+typedef NSDictionary<NSString *, NSString *> RCNHeaderDictionary;
 
 /**
  An internal representation of a cassette.
@@ -52,7 +55,7 @@ typedef NSDictionary<NSString *, NSString *> *SNAHeaderDictionary;
 /**
  Additional HTTP request headers from `NSURLSessionConfiguration`.
  */
-@property (copy, nonatomic, readonly, nullable) SNAHeaderDictionary additionalRequestHeaders;
+@property (copy, nonatomic, readonly, nullable) RCNHeaderDictionary *additionalRequestHeaders;
 
 /**
  The recorded HTTP response.
@@ -86,7 +89,7 @@ typedef NSDictionary<NSString *, NSString *> *SNAHeaderDictionary;
  */
 - (instancetype)initWithName:(NSString *)name
                      request:(NSURLRequest *)request
-    additionalRequestHeaders:(nullable SNAHeaderDictionary)additionalRequestHeaders
+    additionalRequestHeaders:(nullable RCNHeaderDictionary *)additionalRequestHeaders
                     response:(nullable NSHTTPURLResponse *)response
                         data:(nullable NSData *)data
                        error:(nullable NSError *)error;
@@ -109,7 +112,7 @@ typedef NSDictionary<NSString *, NSString *> *SNAHeaderDictionary;
  @return YES if the supplied request matches the cassette's recorded request
  */
 - (BOOL)validateRequest:(NSURLRequest *)request
-        additionHeaders:(nullable SNAHeaderDictionary)headers
+        additionHeaders:(nullable RCNHeaderDictionary *)headers
       validationOptions:(RCNValidationOptions)options
                   error:(NSError *_Nullable *)error;
 

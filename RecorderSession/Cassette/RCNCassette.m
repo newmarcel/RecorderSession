@@ -16,7 +16,7 @@ static BOOL RCNIsEqual(id _Nullable lhs, id _Nullable rhs);
 
 @implementation RCNCassette
 
-- (instancetype)initWithName:(NSString *)name request:(NSURLRequest *)request additionalRequestHeaders:(nullable SNAHeaderDictionary)additionalRequestHeaders response:(nullable NSHTTPURLResponse *)response data:(nullable NSData *)data error:(nullable NSError *)error
+- (instancetype)initWithName:(NSString *)name request:(NSURLRequest *)request additionalRequestHeaders:(nullable RCNHeaderDictionary *)additionalRequestHeaders response:(nullable NSHTTPURLResponse *)response data:(nullable NSData *)data error:(nullable NSError *)error
 {
     NSParameterAssert(name);
     NSParameterAssert(request);
@@ -83,7 +83,7 @@ static BOOL RCNIsEqual(id _Nullable lhs, id _Nullable rhs);
 
 #pragma mark - Validation
 
-- (BOOL)validateRequest:(NSURLRequest *)request additionHeaders:(nullable SNAHeaderDictionary)headers validationOptions:(RCNValidationOptions)options error:(NSError *_Nullable *)error
+- (BOOL)validateRequest:(NSURLRequest *)request additionHeaders:(nullable RCNHeaderDictionary *)headers validationOptions:(RCNValidationOptions)options error:(NSError *_Nullable *)error
 {
     NSParameterAssert(request);
 
