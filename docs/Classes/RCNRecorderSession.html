@@ -212,15 +212,15 @@ allow managing the granularity of the matching between
 the original and the recorded URL request.</p>
 
 <p>You can set individual validation options or XOR (^) out individual
-options from <code>.all</code>.</p>
+options from <code>.default</code>.</p>
 
 <p>e.g.:</p>
 <pre class="highlight plaintext"><code>RCNValidationOptionScheme | RCNValidationOptionHost | RCNValidationOptionPath
 </code></pre>
-<pre class="highlight plaintext"><code>RCNValidationOptionAll ^ RCNValidationOptionQuery
+<pre class="highlight plaintext"><code>RCNValidationOptionDefault ^ RCNValidationOptionQuery
 </code></pre>
 
-<p>Defaults to <code>.all</code></p>
+<p>Defaults to <code>.default</code></p>
 
                       </div>
                       <div class="declaration">
