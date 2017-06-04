@@ -36,6 +36,10 @@
     XCTAssertEqualObjects(session.backingSession, NSURLSession.sharedSession);
     XCTAssertEqualObjects(session.cassetteBundle, [self cassetteBundle]);
     XCTAssertEqual(session.insertedCassettes.count, 0);
+    
+    // Test forwarding
+    XCTAssertEqualObjects(session.configuration, session.backingSession.configuration);
+    [session invalidateAndCancel];
 }
 
 - (void)testInsertCassette
@@ -113,15 +117,6 @@
 
     [session ejectCassette];
     XCTAssertNil(session.currentCassette);
-}
-
-- (void)testDataTaskEmptyCassette
-{
-    // TODO
-}
-
-- (void)testDataTaskExistingCassette
-{
 }
 
 @end

@@ -29,6 +29,11 @@ typedef NS_ENUM(NSInteger, RCNCassetteError) {
 };
 
 /**
+ A convenience type for a HTTP header dictionary containing string values.
+ */
+typedef NSDictionary<NSString *, NSString *> RCNHeaderDictionary;
+
+/**
  An internal representation of a cassette.
  
  A cassette is a recorded network interaction consisting
@@ -46,6 +51,11 @@ typedef NS_ENUM(NSInteger, RCNCassetteError) {
  The recorded HTTP request.
  */
 @property (copy, nonatomic, readonly) NSURLRequest *request;
+
+/**
+ Additional HTTP request headers from `NSURLSessionConfiguration`.
+ */
+@property (copy, nonatomic, readonly, nullable) RCNHeaderDictionary *additionalRequestHeaders;
 
 /**
  The recorded HTTP response.
@@ -72,12 +82,14 @@ typedef NS_ENUM(NSInteger, RCNCassetteError) {
 
  @param name The cassette name
  @param request An URL request
+ @param additionalRequestHeaders A dictionary of additional headers sent with the request
  @param response A (HTTP) URL response
  @param data Optional response data
  @param error Optional error
  */
 - (instancetype)initWithName:(NSString *)name
                      request:(NSURLRequest *)request
+    additionalRequestHeaders:(nullable RCNHeaderDictionary *)additionalRequestHeaders
                     response:(nullable NSHTTPURLResponse *)response
                         data:(nullable NSData *)data
                        error:(nullable NSError *)error;
@@ -94,11 +106,15 @@ typedef NS_ENUM(NSInteger, RCNCassetteError) {
  it to the supplied `request`.
 
  @param request The `NSURLRequest` for validation
+ @param headers Additional HTTP request headers
  @param options Options to control the validation behavior
  @param error An optional error
  @return YES if the supplied request matches the cassette's recorded request
  */
-- (BOOL)validateRequest:(NSURLRequest *)request validationOptions:(RCNValidationOptions)options error:(NSError *_Nullable *)error;
+- (BOOL)validateRequest:(NSURLRequest *)request
+      additionalHeaders:(nullable RCNHeaderDictionary *)headers
+      validationOptions:(RCNValidationOptions)options
+                  error:(NSError *_Nullable *)error;
 
 @end
 

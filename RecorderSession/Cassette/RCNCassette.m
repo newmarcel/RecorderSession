@@ -16,7 +16,7 @@ static BOOL RCNIsEqual(id _Nullable lhs, id _Nullable rhs);
 
 @implementation RCNCassette
 
-- (instancetype)initWithName:(NSString *)name request:(NSURLRequest *)request response:(NSHTTPURLResponse *)response data:(NSData *)data error:(NSError *)error
+- (instancetype)initWithName:(NSString *)name request:(NSURLRequest *)request additionalRequestHeaders:(nullable RCNHeaderDictionary *)additionalRequestHeaders response:(nullable NSHTTPURLResponse *)response data:(nullable NSData *)data error:(nullable NSError *)error
 {
     NSParameterAssert(name);
     NSParameterAssert(request);
@@ -26,6 +26,7 @@ static BOOL RCNIsEqual(id _Nullable lhs, id _Nullable rhs);
     {
         self.name = name;
         self.request = request;
+        self.additionalRequestHeaders = additionalRequestHeaders;
         self.response = response;
         self.responseData = data;
         self.responseError = error;
@@ -82,7 +83,7 @@ static BOOL RCNIsEqual(id _Nullable lhs, id _Nullable rhs);
 
 #pragma mark - Validation
 
-- (BOOL)validateRequest:(NSURLRequest *)request validationOptions:(RCNValidationOptions)options error:(NSError *_Nullable *)error
+- (BOOL)validateRequest:(NSURLRequest *)request additionalHeaders:(nullable RCNHeaderDictionary *)headers validationOptions:(RCNValidationOptions)options error:(NSError *_Nullable *)error
 {
     NSParameterAssert(request);
 
@@ -195,6 +196,17 @@ static BOOL RCNIsEqual(id _Nullable lhs, id _Nullable rhs);
         }
     }
 
+    // Additional request headers
+    if(options & RCNValidationOptionAdditionalRequestHeaders)
+    {
+        if(!RCNIsEqual(self.additionalRequestHeaders, headers))
+        {
+            NSString *reason = NSLocalizedString(@"The additional HTTP request headers don't match the recorded headers.", nil);
+            [self updateValidationError:error withReason:reason];
+            return NO;
+        }
+    }
+
     return YES;
 }
 
@@ -230,6 +242,16 @@ static BOOL RCNIsEqual(id _Nullable lhs, id _Nullable rhs)
     if([lhs isKindOfClass:[NSNumber class]])
     {
         return [lhs isEqualToNumber:rhs];
+    }
+
+    if([lhs isKindOfClass:[NSDictionary class]])
+    {
+        return [lhs isEqualToDictionary:rhs];
+    }
+
+    if([lhs isKindOfClass:[NSArray class]])
+    {
+        return [lhs isEqualToArray:rhs];
     }
 
     return [lhs isEqual:rhs];

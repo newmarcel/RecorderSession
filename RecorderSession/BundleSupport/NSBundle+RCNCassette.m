@@ -40,7 +40,7 @@
     }
 
     NSData *data = [NSData dataWithContentsOfURL:cassetteURL];
-    if(data == nil)
+    if(data == nil || data.length == 0)
     {
         RCNLog(@"The cassette \"%@\" appears to be empty.", name);
         return nil;

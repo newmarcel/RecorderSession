@@ -342,9 +342,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@E@RCNValidationOptions@RCNValidationOptionAll"></a>
-                    <a name="//apple_ref/objc/Case/RCNValidationOptionAll" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@E@RCNValidationOptions@RCNValidationOptionAll">RCNValidationOptionAll</a>
+                    <a name="/c:@E@RCNValidationOptions@RCNValidationOptionAdditionalRequestHeaders"></a>
+                    <a name="//apple_ref/objc/Case/RCNValidationOptionAdditionalRequestHeaders" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@E@RCNValidationOptions@RCNValidationOptionAdditionalRequestHeaders">RCNValidationOptionAdditionalRequestHeaders</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -352,23 +352,55 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Validates all available components of an <code>NSURLRequest</code>.</p>
+                        <p>Validates additional HTTP request headers</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
-                          <pre class="highlight"><code><span class="n">RCNValidationOptionAll</span> <span class="o">=</span> <span class="n"><a href="../Enums/RCNValidationOptions.html#/c:@E@RCNValidationOptions@RCNValidationOptionScheme">RCNValidationOptionScheme</a></span> <span class="o">|</span> <span class="n"><a href="../Enums/RCNValidationOptions.html#/c:@E@RCNValidationOptions@RCNValidationOptionHost">RCNValidationOptionHost</a></span> <span class="o">|</span>
-                         <span class="n"><a href="../Enums/RCNValidationOptions.html#/c:@E@RCNValidationOptions@RCNValidationOptionPath">RCNValidationOptionPath</a></span> <span class="o">|</span> <span class="n"><a href="../Enums/RCNValidationOptions.html#/c:@E@RCNValidationOptions@RCNValidationOptionQuery">RCNValidationOptionQuery</a></span> <span class="o">|</span>
-                         <span class="n"><a href="../Enums/RCNValidationOptions.html#/c:@E@RCNValidationOptions@RCNValidationOptionHTTPMethod">RCNValidationOptionHTTPMethod</a></span> <span class="o">|</span>
-                         <span class="n"><a href="../Enums/RCNValidationOptions.html#/c:@E@RCNValidationOptions@RCNValidationOptionHTTPBody">RCNValidationOptionHTTPBody</a></span> <span class="o">|</span>
-                         <span class="n"><a href="../Enums/RCNValidationOptions.html#/c:@E@RCNValidationOptions@RCNValidationOptionHTTPHeaderFields">RCNValidationOptionHTTPHeaderFields</a></span></code></pre>
+                          <pre class="highlight"><code><span class="n">RCNValidationOptionAdditionalRequestHeaders</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">7</span></code></pre>
 
                         </div>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">static</span> <span class="k">var</span> <span class="nv">all</span><span class="p">:</span> <span class="kt">RCNValidationOptions</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="k">var</span> <span class="nv">additionalRequestHeaders</span><span class="p">:</span> <span class="kt">RCNValidationOptions</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@E@RCNValidationOptions@RCNValidationOptionDefault"></a>
+                    <a name="//apple_ref/objc/Case/RCNValidationOptionDefault" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@E@RCNValidationOptions@RCNValidationOptionDefault">RCNValidationOptionDefault</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Default validation options for <code>NSURLRequest</code> components.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="n">RCNValidationOptionDefault</span> <span class="o">=</span>
+    <span class="n"><a href="../Enums/RCNValidationOptions.html#/c:@E@RCNValidationOptions@RCNValidationOptionScheme">RCNValidationOptionScheme</a></span> <span class="o">|</span> <span class="n"><a href="../Enums/RCNValidationOptions.html#/c:@E@RCNValidationOptions@RCNValidationOptionHost">RCNValidationOptionHost</a></span> <span class="o">|</span>
+    <span class="n"><a href="../Enums/RCNValidationOptions.html#/c:@E@RCNValidationOptions@RCNValidationOptionPath">RCNValidationOptionPath</a></span> <span class="o">|</span> <span class="n"><a href="../Enums/RCNValidationOptions.html#/c:@E@RCNValidationOptions@RCNValidationOptionQuery">RCNValidationOptionQuery</a></span> <span class="o">|</span>
+    <span class="n"><a href="../Enums/RCNValidationOptions.html#/c:@E@RCNValidationOptions@RCNValidationOptionHTTPMethod">RCNValidationOptionHTTPMethod</a></span> <span class="o">|</span> <span class="n"><a href="../Enums/RCNValidationOptions.html#/c:@E@RCNValidationOptions@RCNValidationOptionHTTPBody">RCNValidationOptionHTTPBody</a></span> <span class="o">|</span>
+    <span class="n"><a href="../Enums/RCNValidationOptions.html#/c:@E@RCNValidationOptions@RCNValidationOptionHTTPHeaderFields">RCNValidationOptionHTTPHeaderFields</a></span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">static</span> <span class="kd">var</span> <span class="err">`</span><span class="k">default</span><span class="err">`</span><span class="p">:</span> <span class="kt">RCNValidationOptions</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>

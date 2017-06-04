@@ -31,10 +31,15 @@
     {
         self.backingSession = backingSession;
         self.cassetteBundle = bundle;
-        self.validationOptions = RCNValidationOptionAll;
+        self.validationOptions = RCNValidationOptionDefault;
         self.insertedMutableCassettes = [NSMutableArray new];
     }
     return self;
+}
+
+- (id)forwardingTargetForSelector:(SEL)aSelector
+{
+    return self.backingSession;
 }
 
 #pragma mark - Insert and Eject
@@ -88,7 +93,10 @@
     if(cassette)
     {
         NSError *error;
-        [cassette validateRequest:request validationOptions:self.validationOptions error:&error];
+        [cassette validateRequest:request
+                additionalHeaders:self.configuration.HTTPAdditionalHeaders
+                validationOptions:self.validationOptions
+                            error:&error];
         if(error != nil && error.domain == RCNCassetteErrorDomain && error.code == RCNCassetteErrorRequestValidationFailed)
         {
             NSString *reason = error.userInfo[NSLocalizedFailureReasonErrorKey];
@@ -99,6 +107,8 @@
         [self ejectCassette];
         return [[RCNRecorderSessionDataTask alloc] initWithCassette:cassette completionHandler:completionHandler];
     }
+
+    RCNHeaderDictionary *additionalHeaders = self.configuration.HTTPAdditionalHeaders;
 
     // Perform the live request and record the response
     id handler = ^(NSData *data, NSURLResponse *response, NSError *error) {
@@ -112,6 +122,7 @@
 
         RCNCassette *cassette = [[RCNCassette alloc] initWithName:currentCassette
                                                           request:request
+                                         additionalRequestHeaders:additionalHeaders
                                                          response:(NSHTTPURLResponse *)response
                                                              data:data
                                                             error:error];
@@ -132,11 +143,6 @@
         RCNExit();
     };
     return [self.backingSession dataTaskWithRequest:request completionHandler:handler];
-}
-
-- (void)invalidateAndCancel
-{
-    [self.backingSession invalidateAndCancel];
 }
 
 @end

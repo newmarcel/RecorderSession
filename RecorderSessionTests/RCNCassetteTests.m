@@ -36,10 +36,20 @@
     return [@"{\"hello\": \"world\"}" dataUsingEncoding:NSUTF8StringEncoding];
 }
 
+- (RCNHeaderDictionary *)headers
+{
+    return @{
+        @"Accept-Language": @"en",
+        @"User-Agent": @"ExampleApp/1",
+        @"Accept-Encoding": @"gzip;q=1.0,compress;q=0.5"
+    };
+}
+
 - (RCNCassette *)cassette
 {
     return [[RCNCassette alloc] initWithName:kName
                                      request:[self request]
+                    additionalRequestHeaders:[self headers]
                                     response:[self response]
                                         data:[self data]
                                        error:nil];
@@ -52,6 +62,7 @@
     RCNCassette *cassette = [self cassette];
     XCTAssertEqualObjects(cassette.name, kName);
     XCTAssertEqualObjects(cassette.request, [self request]);
+    XCTAssertEqualObjects(cassette.additionalRequestHeaders, [self headers]);
     XCTAssertEqualObjects(cassette.response.URL, [self response].URL);
     XCTAssertEqual(cassette.response.statusCode, [self response].statusCode);
     XCTAssertEqualObjects(cassette.responseData, [self data]);
@@ -83,7 +94,7 @@
     RCNCassette *cassette = [self cassette];
 
     NSError *error;
-    BOOL result = [cassette validateRequest:[self request] validationOptions:RCNValidationOptionNone error:&error];
+    BOOL result = [cassette validateRequest:[self request] additionalHeaders:nil validationOptions:RCNValidationOptionNone error:&error];
     XCTAssertTrue(result);
     XCTAssertNil(error);
 }
@@ -184,17 +195,31 @@
     [self runTestOptions:RCNValidationOptionHTTPHeaderFields invalidRequest:invalidRequest];
 }
 
+- (void)testRequestValidationAdditionalRequestHeaders
+{
+    NSDictionary *invalidHeaders = @{ @"invalid": @"header",
+        @"Content-Type": @"text/invalid" };
+
+    [self runTestOptions:RCNValidationOptionAdditionalRequestHeaders invalidAdditionalHeaders:invalidHeaders invalidRequest:[self request]];
+}
+
 - (void)runTestOptions:(RCNValidationOptions)options invalidRequest:(NSURLRequest *)invalidRequest
+{
+    [self runTestOptions:options invalidAdditionalHeaders:nil invalidRequest:invalidRequest];
+}
+
+- (void)runTestOptions:(RCNValidationOptions)options invalidAdditionalHeaders:(nullable RCNHeaderDictionary *)headers invalidRequest:(NSURLRequest *)invalidRequest
 {
     RCNCassette *cassette = [self cassette];
     NSURLRequest *validRequest = [self request];
+    RCNHeaderDictionary *validHeaders = [self headers];
 
     NSError *error;
-    BOOL result = [cassette validateRequest:validRequest validationOptions:options error:&error];
+    BOOL result = [cassette validateRequest:validRequest additionalHeaders:validHeaders validationOptions:options error:&error];
     XCTAssertTrue(result);
     XCTAssertNil(error);
 
-    result = [cassette validateRequest:invalidRequest validationOptions:options error:&error];
+    result = [cassette validateRequest:invalidRequest additionalHeaders:headers validationOptions:options error:&error];
     XCTAssertFalse(result);
     XCTAssertNotNil(error);
 }
@@ -203,8 +228,8 @@
 {
     RCNCassette *cassette = [self cassette];
     NSURLRequest *validRequest = [self request];
-    XCTAssertTrue([cassette validateRequest:validRequest validationOptions:options error:NULL]);
-    XCTAssertFalse([cassette validateRequest:invalidRequest validationOptions:options error:NULL]);
+    XCTAssertTrue([cassette validateRequest:validRequest additionalHeaders:nil validationOptions:options error:NULL]);
+    XCTAssertFalse([cassette validateRequest:invalidRequest additionalHeaders:nil validationOptions:options error:NULL]);
 }
 
 @end

@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
  the original and the recorded URL request.
  
  You can set individual validation options or XOR (^) out individual
- options from `.all`.
+ options from `.default`.
  
  e.g.:
  
@@ -56,10 +56,10 @@ NS_ASSUME_NONNULL_BEGIN
  ```
  
  ```
- RCNValidationOptionAll ^ RCNValidationOptionQuery
+ RCNValidationOptionDefault ^ RCNValidationOptionQuery
  ```
  
- Defaults to `.all`
+ Defaults to `.default`
  */
 @property (nonatomic) RCNValidationOptions validationOptions;
 

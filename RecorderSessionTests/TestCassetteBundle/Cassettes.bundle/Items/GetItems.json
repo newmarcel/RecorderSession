@@ -1,4 +1,9 @@
 {
+  "additionalRequestHeaders" : {
+    "Accept-Language" : "en",
+    "User-Agent" : "ExampleApp\/1",
+    "Accept-Encoding" : "gzip;q=1.0,compress;q=0.5"
+  },
   "body" : {
     "type" : "json",
     "payload" : {
