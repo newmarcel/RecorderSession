@@ -11,12 +11,14 @@
 #import "RCNRecorderSessionDataTask.h"
 #import "RCNCassette.h"
 #import "NSBundle+RCNCassette+Private.h"
+#import "RCNFinishRecording.h"
 
 @interface RCNRecorderSession ()
 @property (nonatomic, readwrite) NSURLSession *backingSession;
 @property (nonatomic, readwrite) NSBundle *cassetteBundle;
 @property (nonatomic) NSMutableArray *insertedMutableCassettes;
 @property (nonatomic, readonly, nullable) NSString *currentCassette;
+@property (copy, nonatomic, nonnull) RCNRecordingCompletionHandler recordingCompletionHandler;
 @end
 
 @implementation RCNRecorderSession
@@ -33,6 +35,10 @@
         self.cassetteBundle = bundle;
         self.validationOptions = RCNValidationOptionDefault;
         self.insertedMutableCassettes = [NSMutableArray new];
+        
+        self.recordingCompletionHandler = ^(NSString *message, NSString *cassetteName, NSString *absolutePath) {
+            RCNFinishRecording(message, cassetteName, absolutePath);
+        };
     }
     return self;
 }
@@ -126,21 +132,19 @@
                                                          response:(NSHTTPURLResponse *)response
                                                              data:data
                                                             error:error];
+        
         BOOL isWritten = [cassette writeToDisk];
+        
+        NSString *message;
         if(isWritten)
         {
-            RCNLog(@"Recorded new cassette \"%@\" at location %@.\nPlease add it to your test bundle to replay the request.",
-                cassette.name,
-                cassette.fileURL.absoluteString);
+            message = @"Finished recording cassette.";
         }
         else
         {
-            RCNLog(@"Failed to write cassette \"%@\" to %@.\nPlease check that the path is writable.",
-                cassette.name,
-                cassette.fileURL.absoluteString);
+            message = @"Failed to record cassette.";
         }
-        // Leave the test execution
-        RCNExit();
+        self.recordingCompletionHandler(message, cassette.name, cassette.fileURL.absoluteString);
     };
     return [self.backingSession dataTaskWithRequest:request completionHandler:handler];
 }

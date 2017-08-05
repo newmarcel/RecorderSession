@@ -210,15 +210,17 @@ static BOOL RCNIsEqual(id _Nullable lhs, id _Nullable rhs);
     return YES;
 }
 
-- (void)updateValidationError:(NSError *_Nonnull *)error withReason:(nonnull NSString *)reason
+- (BOOL)updateValidationError:(NSError *_Nonnull *)error withReason:(nonnull NSString *)reason
 {
     if(error == NULL)
     {
-        return;
+        return NO;
     }
 
     NSDictionary *userInfo = @{ NSLocalizedFailureReasonErrorKey: reason };
     *error = [NSError errorWithDomain:RCNCassetteErrorDomain code:RCNCassetteErrorRequestValidationFailed userInfo:userInfo];
+    
+    return YES;
 }
 
 @end

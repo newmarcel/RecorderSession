@@ -25,13 +25,16 @@
 		DAABE8501EACB1E900C9FEEC /* RCNRecorderSessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAABE84F1EACB1E900C9FEEC /* RCNRecorderSessionTests.m */; };
 		DAABE8521EACB1F400C9FEEC /* RCNCassetteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAABE8511EACB1F400C9FEEC /* RCNCassetteTests.m */; };
 		DAABE8541EACB20200C9FEEC /* NSBundleRCNCassetteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAABE8531EACB20200C9FEEC /* NSBundleRCNCassetteTests.m */; };
+		DAAD3F771F365E87007A37F1 /* RCNFinishRecording.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC9CFC21EE3FC0000B80A7B /* RCNFinishRecording.m */; };
 		DAB86C7D1EAD064000757E13 /* NSURLComponentsRCNDictionaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB86C7C1EAD064000757E13 /* NSURLComponentsRCNDictionaryTests.m */; };
 		DAB86C7F1EAD067300757E13 /* NSURLRequestRCNDictionaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB86C7E1EAD067300757E13 /* NSURLRequestRCNDictionaryTests.m */; };
 		DAB86C811EAD068A00757E13 /* NSHTTPURLResponseRCNDictionaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB86C801EAD068A00757E13 /* NSHTTPURLResponseRCNDictionaryTests.m */; };
+		DAC9CFC41EE3FC0000B80A7B /* RCNFinishRecording.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC9CFC21EE3FC0000B80A7B /* RCNFinishRecording.m */; };
 		DACB3C511EAB965400CD02A9 /* NSBundle+RCNCassette.h in Headers */ = {isa = PBXBuildFile; fileRef = DACB3C4F1EAB965400CD02A9 /* NSBundle+RCNCassette.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DACB3C521EAB965400CD02A9 /* NSBundle+RCNCassette.h in Headers */ = {isa = PBXBuildFile; fileRef = DACB3C4F1EAB965400CD02A9 /* NSBundle+RCNCassette.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DACB3C531EAB965400CD02A9 /* NSBundle+RCNCassette.m in Sources */ = {isa = PBXBuildFile; fileRef = DACB3C501EAB965400CD02A9 /* NSBundle+RCNCassette.m */; };
 		DACB3C541EAB965400CD02A9 /* NSBundle+RCNCassette.m in Sources */ = {isa = PBXBuildFile; fileRef = DACB3C501EAB965400CD02A9 /* NSBundle+RCNCassette.m */; };
+		DAD294EC1F36599B0015A920 /* RCNFinishRecordingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD294EB1F36599B0015A920 /* RCNFinishRecordingTests.m */; };
 		DAD681D01EB484760085D285 /* RCNCassetteResponseTypeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD681CF1EB484760085D285 /* RCNCassetteResponseTypeTests.m */; };
 		DAD681D21EB485E80085D285 /* RCNRecorderSessionDataTaskTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DAD681D11EB485E80085D285 /* RCNRecorderSessionDataTaskTests.m */; };
 		DAF89E331EAE6A8100562CF2 /* RCNValidationOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = DAF89E321EAE6A8100562CF2 /* RCNValidationOptions.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -89,8 +92,11 @@
 		DAB86C7E1EAD067300757E13 /* NSURLRequestRCNDictionaryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSURLRequestRCNDictionaryTests.m; sourceTree = "<group>"; };
 		DAB86C801EAD068A00757E13 /* NSHTTPURLResponseRCNDictionaryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSHTTPURLResponseRCNDictionaryTests.m; sourceTree = "<group>"; };
 		DABD89301EAFD77200DE1740 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = SOURCE_ROOT; };
+		DAC9CFC11EE3FC0000B80A7B /* RCNFinishRecording.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCNFinishRecording.h; sourceTree = "<group>"; };
+		DAC9CFC21EE3FC0000B80A7B /* RCNFinishRecording.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCNFinishRecording.m; sourceTree = "<group>"; };
 		DACB3C4F1EAB965400CD02A9 /* NSBundle+RCNCassette.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+RCNCassette.h"; sourceTree = "<group>"; };
 		DACB3C501EAB965400CD02A9 /* NSBundle+RCNCassette.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+RCNCassette.m"; sourceTree = "<group>"; };
+		DAD294EB1F36599B0015A920 /* RCNFinishRecordingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCNFinishRecordingTests.m; sourceTree = "<group>"; };
 		DAD681CF1EB484760085D285 /* RCNCassetteResponseTypeTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCNCassetteResponseTypeTests.m; sourceTree = "<group>"; };
 		DAD681D11EB485E80085D285 /* RCNRecorderSessionDataTaskTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCNRecorderSessionDataTaskTests.m; sourceTree = "<group>"; };
 		DAD681D31EB499AA0085D285 /* RCNCassette+Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RCNCassette+Private.h"; sourceTree = "<group>"; };
@@ -192,6 +198,7 @@
 				DAABE8511EACB1F400C9FEEC /* RCNCassetteTests.m */,
 				DAABE8531EACB20200C9FEEC /* NSBundleRCNCassetteTests.m */,
 				DAD681CF1EB484760085D285 /* RCNCassetteResponseTypeTests.m */,
+				DAD294EB1F36599B0015A920 /* RCNFinishRecordingTests.m */,
 				DA18026E1EAD254E00DFA813 /* TestCassetteBundle */,
 				DAABE84E1EACB1CC00C9FEEC /* DictionaryRepresentationTests */,
 				DAFE72591EA3E71B00BBF1B3 /* Supporting Files */,
@@ -226,6 +233,8 @@
 				DAA174B61E7554A000049350 /* RCNRecorderSession.h */,
 				DAA174B71E7554A000049350 /* RCNRecorderSession.m */,
 				DAF89E321EAE6A8100562CF2 /* RCNValidationOptions.h */,
+				DAC9CFC11EE3FC0000B80A7B /* RCNFinishRecording.h */,
+				DAC9CFC21EE3FC0000B80A7B /* RCNFinishRecording.m */,
 				DAABE83F1EABEC6300C9FEEC /* RecorderSessionDataTask */,
 			);
 			path = RecorderSession;
@@ -448,6 +457,7 @@
 				DAA174BF1E7554A000049350 /* NSURLRequest+RCNDictionary.m in Sources */,
 				DAABE84B1EABFE7B00C9FEEC /* RCNCassetteResponseType.m in Sources */,
 				DAA174BB1E7554A000049350 /* NSHTTPURLResponse+RCNDictionary.m in Sources */,
+				DAC9CFC41EE3FC0000B80A7B /* RCNFinishRecording.m in Sources */,
 				DAA174C41E7554A000049350 /* RCNRecorderSession.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -458,6 +468,7 @@
 			files = (
 				DAB86C7F1EAD067300757E13 /* NSURLRequestRCNDictionaryTests.m in Sources */,
 				DAD681D01EB484760085D285 /* RCNCassetteResponseTypeTests.m in Sources */,
+				DAD294EC1F36599B0015A920 /* RCNFinishRecordingTests.m in Sources */,
 				DAB86C811EAD068A00757E13 /* NSHTTPURLResponseRCNDictionaryTests.m in Sources */,
 				DAD681D21EB485E80085D285 /* RCNRecorderSessionDataTaskTests.m in Sources */,
 				DAB86C7D1EAD064000757E13 /* NSURLComponentsRCNDictionaryTests.m in Sources */,
@@ -480,6 +491,7 @@
 				DAFE72721EA3E9C700BBF1B3 /* RCNCassette+RCNDictionary.m in Sources */,
 				DAABE84A1EABFE7B00C9FEEC /* RCNCassetteResponseType.m in Sources */,
 				DAFE72701EA3E9C300BBF1B3 /* NSURLComponents+RCNDictionary.m in Sources */,
+				DAAD3F771F365E87007A37F1 /* RCNFinishRecording.m in Sources */,
 				DAFE726F1EA3E9C100BBF1B3 /* NSHTTPURLResponse+RCNDictionary.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
