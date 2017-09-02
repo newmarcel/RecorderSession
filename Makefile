@@ -6,7 +6,7 @@ BUILD_DIR = $(shell pwd)/build
 DOCS_DIR = $(shell pwd)/docs
 SOURCE_FILES = $(shell pwd)/$(NAME)/**/*.{h,m}
 
-clean:
+clean: doc-headers-unfix
 	rm -rf $(BUILD_DIR)
 	rm -rf Carthage
 	rm -rf $(NAME).framework.zip
@@ -30,7 +30,9 @@ framework:
 	carthage build --no-skip-current
 	carthage archive $(NAME)
 
-docs:
+docs: doc-headers-fix jazzy doc-headers-unfix
+
+jazzy:
 	jazzy \
 	--objc \
 	--clean \
@@ -49,7 +51,13 @@ docs:
 	--author_url "https://github.com/newmarcel"
 	open "$(DOCS_DIR)/index.html"
 
+doc-headers-fix:
+	ln -s $(shell pwd)/$(NAME)/BundleSupport/NSBundle+RCNCassette.h $(shell pwd)/$(NAME)/$(NAME)/
+
+doc-headers-unfix:
+	unlink $(shell pwd)/$(NAME)/$(NAME)/NSBundle+RCNCassette.h
+
 clangformat:
 	find "$(shell pwd)" -iname *.h -o -iname *.m | xargs clang-format -style=file -i
 
-.PHONY: clean init test framework docs clangformat
+.PHONY: clean init test framework docs clangformat jazzy doc-headers-fix doc-headers-unfix

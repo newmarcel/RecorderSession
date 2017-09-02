@@ -10,6 +10,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ Convenience extension for `NSBundle` to retrieve the `cassetteBundle` URL.
+ */
 @interface NSBundle (RCNCassette)
 
 /**
