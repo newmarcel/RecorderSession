@@ -6,7 +6,7 @@ BUILD_DIR = $(shell pwd)/build
 DOCS_DIR = $(shell pwd)/docs
 SOURCE_FILES = $(shell pwd)/$(NAME)/**/*.{h,m}
 
-clean: doc-headers-unfix
+clean:
 	rm -rf $(BUILD_DIR)
 	rm -rf Carthage
 	rm -rf $(NAME).framework.zip

@@ -15,6 +15,5 @@ FOUNDATION_EXPORT double RecorderSessionVersionNumber;
 FOUNDATION_EXPORT const unsigned char RecorderSessionVersionString[];
 
 #import <RecorderSession/RCNRecorderSession.h>
-
 #import <RecorderSession/RCNValidationOptions.h>
 #import <RecorderSession/NSBundle+RCNCassette.h>

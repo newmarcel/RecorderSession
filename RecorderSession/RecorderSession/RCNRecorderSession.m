@@ -91,7 +91,7 @@
     [self.insertedMutableCassettes removeAllObjects];
 }
 
-#pragma mark - NSURLSession Subclass
+#pragma mark - NSURLSessionDataTask Creation
 
 - (NSURLSessionDataTask *)dataTaskWithRequest:(NSURLRequest *)request completionHandler:(nonnull void (^)(NSData *_Nullable, NSURLResponse *_Nullable, NSError *_Nullable))completionHandler
 {
@@ -117,7 +117,7 @@
     RCNHeaderDictionary *additionalHeaders = self.configuration.HTTPAdditionalHeaders;
 
     // Perform the live request and record the response
-    id handler = ^(NSData *data, NSURLResponse *response, NSError *error) {
+    __auto_type handler = ^(NSData *data, NSURLResponse *response, NSError *error) {
         NSString *currentCassette = self.currentCassette;
         if(currentCassette == nil)
         {
