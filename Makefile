@@ -17,7 +17,6 @@ init:
 		--use-system-libraries=true \
 		--with-xml2-include=$(shell xcrun --show-sdk-path)/usr/include/libxml2
 	bundle
-	brew bundle
 
 test:
 	bundle exec fastlane scan \
