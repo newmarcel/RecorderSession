@@ -30,14 +30,23 @@ framework:
 	carthage build --no-skip-current
 	carthage archive $(NAME)
 
-docs: doc-headers-fix jazzy doc-headers-unfix
+docs: docs-pre jazzy docs-post
+
+docs-pre:
+	mkdir -p include/$(NAME)
+	find "$(shell pwd)/$(NAME)" -iname "*.h" -not -path "*/$(NAME).h" \
+	  -exec ln -s {} "$(shell pwd)/include/$(NAME)" \;
+	ln -s $(shell pwd)/$(NAME)/$(NAME).h $(shell pwd)/include/$(NAME).h
+
+docs-post:
+	rm -rf include
 
 jazzy:
 	jazzy \
 	--objc \
 	--clean \
-	--umbrella-header $(NAME)/$(NAME).h \
-	--framework-root $(NAME) \
+	--umbrella-header include/$(NAME).h \
+	--framework-root . \
 	--module $(NAME) \
 	--hide-documentation-coverage \
 	--no-download-badge \
@@ -51,13 +60,7 @@ jazzy:
 	--author_url "https://github.com/newmarcel"
 	open "$(DOCS_DIR)/index.html"
 
-doc-headers-fix:
-	ln -s $(shell pwd)/$(NAME)/BundleSupport/NSBundle+RCNCassette.h $(shell pwd)/$(NAME)/$(NAME)/
-
-doc-headers-unfix:
-	unlink $(shell pwd)/$(NAME)/$(NAME)/NSBundle+RCNCassette.h
-
 clangformat:
 	find "$(shell pwd)" -iname *.h -o -iname *.m | xargs clang-format -style=file -i
 
-.PHONY: clean init test framework docs clangformat jazzy doc-headers-fix doc-headers-unfix
+.PHONY: clean init test framework docs docs-pre jazzy docs-post clangformat
