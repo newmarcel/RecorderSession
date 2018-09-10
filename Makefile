@@ -49,7 +49,6 @@ jazzy:
 	--framework-root . \
 	--module $(NAME) \
 	--hide-documentation-coverage \
-	--no-download-badge \
 	--sdk macosx \
 	--exclude "$(NAME)Tests" \
 	--skip-undocumented \
