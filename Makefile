@@ -1,6 +1,6 @@
 NAME = RecorderSession
 SCHEME = $(NAME) (macOS)
-PROJECT = $(NAME).xcodeproj
+WORKSPACE = $(NAME).xcworkspace
 
 BUILD_DIR = $(shell pwd)/build
 DOCS_DIR = $(shell pwd)/docs
@@ -21,7 +21,7 @@ init:
 test:
 	bundle exec fastlane scan \
 	--clean \
-	--project "$(PROJECT)" \
+	--workspace "$(WORKSPACE)" \
 	--scheme "$(SCHEME)" \
 	--derived_data_path "$(BUILD_DIR)" \
 	--output_directory "$(BUILD_DIR)/TestOutput"
