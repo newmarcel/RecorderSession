@@ -380,7 +380,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = RCN;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1120;
 				ORGANIZATIONNAME = "Marcel Dierkes";
 				TargetAttributes = {
 					DAA174A01E75546700049350 = {
@@ -402,10 +402,11 @@
 			};
 			buildConfigurationList = DAA1749B1E75546700049350 /* Build configuration list for PBXProject "RecorderSession" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = DAA174971E75546700049350;
 			productRefGroup = DAA174A21E75546700049350 /* Products */;
@@ -512,6 +513,7 @@
 			baseConfigurationReference = DABD89301EAFD77200DE1740 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -569,6 +571,7 @@
 			baseConfigurationReference = DABD89301EAFD77200DE1740 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
