@@ -4,7 +4,7 @@
 
 [Docs](https://newmarcel.github.io/RecorderSession/index.html) | [Downloads](https://github.com/newmarcel/RecorderSession/releases)
 
-[![Build Status](https://travis-ci.org/newmarcel/RecorderSession.svg?branch=master)](https://travis-ci.org/newmarcel/RecorderSession) [![codecov](https://codecov.io/gh/newmarcel/RecorderSession/branch/master/graph/badge.svg)](https://codecov.io/gh/newmarcel/RecorderSession)
+![Test](https://github.com/newmarcel/RecorderSession/workflows/Test/badge.svg?branch=master)
 
 An `NSURLSession` test framework for iOS and macOS inspired by [DVR](https://github.com/venmo/DVR) and [VCR](https://github.com/vcr/vcr) _(that's where the cassette metaphor comes from…)_.
 
