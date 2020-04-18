@@ -13,18 +13,22 @@ clean:
 
 init:
 	gem install bundler
-	bundle config build.nokogiri \
-		--use-system-libraries=true \
-		--with-xml2-include=$(shell xcrun --show-sdk-path)/usr/include/libxml2
-	bundle
+	bundle install
 
 test:
-	bundle exec fastlane scan \
-	--clean \
-	--workspace "$(WORKSPACE)" \
-	--scheme "$(SCHEME)" \
-	--derived_data_path "$(BUILD_DIR)" \
-	--output_directory "$(BUILD_DIR)/TestOutput"
+	@mkdir -p '$(BUILD_DIR)/TestOutput'
+	@set -o pipefail && \
+	env LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 NSUnbufferedIO=YES \
+	xcodebuild \
+	-workspace "$(WORKSPACE)" \
+	-scheme "$(SCHEME)" \
+	-derivedDataPath '$(BUILD_DIR)' \
+	clean build test \
+	| tee '$(BUILD_DIR)/TestOutput/${SCHEME}.log' \
+	| xcpretty \
+	--report html \
+	--output '${BUILD_DIR}/TestOutput/report.html' \
+	--report junit --output '${BUILD_DIR}/TestOutput/report.junit'
 
 framework:
 	carthage build --no-skip-current
