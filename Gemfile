@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
-ruby ">= 2.3.0"
+ruby ">= 2.6.0"
 
-gem "fastlane", ">= 2.28.1"
+gem "xcpretty"
 gem "jazzy"
 gem "slather"
