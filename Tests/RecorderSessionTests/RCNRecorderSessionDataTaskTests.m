@@ -27,7 +27,7 @@
 
 - (RCNCassette *)cassette
 {
-    NSBundle *bundle = [NSBundle bundleForClass:[self class]].cassetteBundle;
+    NSBundle *bundle = SWIFTPM_MODULE_BUNDLE.cassetteBundle;
     RCNCassette *cassette = [bundle cassetteWithName:@"GetSomething"];
     XCTAssertNotNil(cassette);
     return cassette;

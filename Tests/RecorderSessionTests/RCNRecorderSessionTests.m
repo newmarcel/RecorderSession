@@ -20,7 +20,7 @@
 
 - (NSBundle *)cassetteBundle
 {
-    return [NSBundle bundleForClass:[self class]].cassetteBundle;
+    return SWIFTPM_MODULE_BUNDLE.cassetteBundle;
 }
 
 - (RCNRecorderSession *)session

@@ -18,8 +18,7 @@
 
 - (void)testCassetteBundle
 {
-    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSBundle *cassetteBundle = bundle.cassetteBundle;
+    NSBundle *cassetteBundle = SWIFTPM_MODULE_BUNDLE.cassetteBundle;
     XCTAssertNotNil(cassetteBundle);
 
     // Assume the xctest bundle doesn't contain a cassette bundle
@@ -28,8 +27,7 @@
 
 - (void)testCassetteWithName
 {
-    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSBundle *cassetteBundle = bundle.cassetteBundle;
+    NSBundle *cassetteBundle = SWIFTPM_MODULE_BUNDLE.cassetteBundle;
 
     RCNCassette *cassette = [cassetteBundle cassetteWithName:@"GetSomething"];
     XCTAssertNotNil(cassette);
@@ -37,8 +35,7 @@
 
 - (void)testCassetteWithNameInSubdirectory
 {
-    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSBundle *cassetteBundle = bundle.cassetteBundle;
+    NSBundle *cassetteBundle = SWIFTPM_MODULE_BUNDLE.cassetteBundle;
 
     RCNCassette *cassette = [cassetteBundle cassetteWithName:@"Items/GetItems"];
     XCTAssertNotNil(cassette);
@@ -46,8 +43,7 @@
 
 - (void)testCassetteWithNameFailed
 {
-    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSBundle *cassetteBundle = bundle.cassetteBundle;
+    NSBundle *cassetteBundle = SWIFTPM_MODULE_BUNDLE.cassetteBundle;
 
     RCNCassette *cassette = [cassetteBundle cassetteWithName:@"Void"];
     XCTAssertNil(cassette);
@@ -55,8 +51,7 @@
 
 - (void)testCassetteEmpty
 {
-    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSBundle *cassetteBundle = bundle.cassetteBundle;
+    NSBundle *cassetteBundle = SWIFTPM_MODULE_BUNDLE.cassetteBundle;
     
     RCNCassette *cassette = [cassetteBundle cassetteWithName:@"Empty"];
     XCTAssertNil(cassette);
@@ -64,8 +59,7 @@
 
 - (void)testCassetteInvalid
 {
-    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    NSBundle *cassetteBundle = bundle.cassetteBundle;
+    NSBundle *cassetteBundle = SWIFTPM_MODULE_BUNDLE.cassetteBundle;
     
     RCNCassette *cassette = [cassetteBundle cassetteWithName:@"Invalid"];
     XCTAssertNil(cassette);
